@@ -4,6 +4,8 @@ const cors = require('cors')
 const mongodbConnect = require('./config/db')
 
 const authController = require("./controllers/auth.controller") 
+const flatController = require("./controllers/flat.controller")
+const residentController = require("./controllers/resident.controller")
 
 const app = express()
 app.use(express.json())
@@ -14,6 +16,8 @@ app.get("/", (req, res)=>{
     res.send("hello world!")
 })
 app.use("/auth", authController)
+app.use("/flat", flatController);
+app.use("/resident", residentController);
 
 const port = process.env.PORT || 3001
 
@@ -24,7 +28,7 @@ module.exports = () => {
             console.log(`Server is running on the port ${port}`)
         } catch (error) {
             console.log({
-                message: error.message,
+                message: error.message, 
                 location: "server.js"
             })
         }
